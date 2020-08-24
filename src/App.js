@@ -1,26 +1,79 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Header from "./components/Header";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import "./App.css";
+import { Container, Button } from 'react-bootstrap';
+// import TodoList from "./components/TodoList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+class App extends Component {
+  state = {
+    items: [
+      {
+        id: 11,
+        content: 'first todo',
+        done: false
+      }
+    ],
+    id: '',
+    content: "",
+    done: false
+  };
+    
+  inputHandler = (event) => {
+
+    console.log(this.state.content);
+    
+    this.setState({
+      content: event.target.value
+    })
+    
+  };
+
+  addTodo = (event) => {
+    event.preventDefault();
+
+    if (this.state.content.length === 0) {
+      return;
+    }
+
+    const newItem = {
+      content: this.state.content,
+      id: Date.now(),
+      done: false
+    };
+    
+    const newItems = [...this.state.items];
+    newItems.push(newItem);
+
+    this.setState({
+      items: newItems,
+      content: ''
+    });
+
+
+  }
+
+
+
+  render () {
+    return (
+      <Container>
+        <Header></Header>
+        <input className='m-3' onChange={this.inputHandler}></input>
+        <Button variant="outline-light" onClick={this.addTodo}>Add TODO</Button>
+        <ul>
+          {this.state.items.map(item => (
+            <li key={item.id}>{item.content}</li>
+          ))}
+        </ul>
+      </Container>
+    )
+  }
+
 }
 
-export default App;
+
+export default App
