@@ -53,25 +53,42 @@ class App extends Component {
 
     this.setState({
       items: newItems,
-      content: ""     
+      // TODO clear input     
     });
   }
-  // TODO finish
-  // doneHandler = (event) => {
-  //   // const newItems = [...this.state.items]
-  //   console.log(event.target.getAttribute('id'))
-  // }
+
+  doneHandler = id => {
+    console.log(id);
+    let newItems = [...this.state.items];
+    let newItem = newItems.find(item => item.id === id);
+    newItem.done = !newItem.done;
+    console.log(newItem);
+    this.setState({
+      items: newItems
+    })
+  }
   
+  deleteHandler = id => {
+    let newItems = [...this.state.items];
+    newItems = newItems.filter(item => item.id !== id);
+    this.setState({
+      items: newItems
+    });
+  }
 
 
   render () {
     return (
       <Container>
         <Header></Header>
-        <input className='m-3' onChange={this.inputHandler}></input>
-        <Button variant="outline-light" onClick={this.addTodo}>Add TODO</Button>
+        <div className='flex '>
+          <input className='m-3' onChange={this.inputHandler}></input>
+          <Button variant="outline-light" onClick={this.addTodo}>Add TODO</Button>
+        </div>
         <TodoList 
           items={this.state.items} 
+          deleteHandler={this.deleteHandler}
+          doneHandler={this.doneHandler}
           ></TodoList>
       </Container>
     )

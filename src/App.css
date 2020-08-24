@@ -1,4 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+
 body {
     background-color: #363636;
     color: white;
+    font-family: 'Jura', sans-serif;
+}
+
+.m-2 {
+    font-size: 3rem;
 }
