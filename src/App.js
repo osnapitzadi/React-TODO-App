@@ -81,9 +81,9 @@ class App extends Component {
     return (
       <Container>
         <Header></Header>
-        <div className='flex '>
+        <div className='d-flex justify-content-center'>
           <input className='m-3' onChange={this.inputHandler}></input>
-          <Button variant="outline-light" onClick={this.addTodo}>Add TODO</Button>
+          <Button variant="outline-light" className='btn-sm m-3' onClick={this.addTodo}>Add TODO</Button>
         </div>
         <TodoList 
           items={this.state.items} 
