@@ -3,29 +3,32 @@ import Header from "./components/Header";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "./App.css";
 import { Container, Button } from 'react-bootstrap';
-// import TodoList from "./components/TodoList";
+import TodoList from "./components/TodoList";
 
 
 
 
 class App extends Component {
   state = {
-    items: [
-      {
-        id: 11,
-        content: 'first todo',
-        done: false
-      }
-    ],
-    id: '',
-    content: "",
-    done: false
+      items: [
+        {
+          id: 11,
+          content: 'first todo',
+          done: false
+        },
+        {
+          id: 22,
+          content: 'second todo',
+          done: true
+        }
+      ],
+      id: undefined,
+      content: "",
+      done: false
   };
-    
-  inputHandler = (event) => {
 
-    console.log(this.state.content);
     
+  inputHandler = (event) => {    
     this.setState({
       content: event.target.value
     })
@@ -50,25 +53,43 @@ class App extends Component {
 
     this.setState({
       items: newItems,
-      content: ''
+      // TODO clear input     
     });
-
-
   }
 
+  doneHandler = id => {
+    console.log(id);
+    let newItems = [...this.state.items];
+    let newItem = newItems.find(item => item.id === id);
+    newItem.done = !newItem.done;
+    console.log(newItem);
+    this.setState({
+      items: newItems
+    })
+  }
+  
+  deleteHandler = id => {
+    let newItems = [...this.state.items];
+    newItems = newItems.filter(item => item.id !== id);
+    this.setState({
+      items: newItems
+    });
+  }
 
 
   render () {
     return (
       <Container>
         <Header></Header>
-        <input className='m-3' onChange={this.inputHandler}></input>
-        <Button variant="outline-light" onClick={this.addTodo}>Add TODO</Button>
-        <ul>
-          {this.state.items.map(item => (
-            <li key={item.id}>{item.content}</li>
-          ))}
-        </ul>
+        <div className='flex '>
+          <input className='m-3' onChange={this.inputHandler}></input>
+          <Button variant="outline-light" onClick={this.addTodo}>Add TODO</Button>
+        </div>
+        <TodoList 
+          items={this.state.items} 
+          deleteHandler={this.deleteHandler}
+          doneHandler={this.doneHandler}
+          ></TodoList>
       </Container>
     )
   }
