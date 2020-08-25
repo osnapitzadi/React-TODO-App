@@ -4,10 +4,6 @@ import { BsFillTrashFill, BsCheckBox } from "react-icons/bs";
 
 export default class ItemList  extends Component {
     render () {
-        console.log(this);
-        if (this.props.done) {
-            // ListGroupProps.variant = 'success'
-        }
         return (
             <ListGroup.Item
                 className='d-flex justify-content-around align-items-center'

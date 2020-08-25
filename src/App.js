@@ -53,7 +53,7 @@ class App extends Component {
 
     this.setState({
       items: newItems,
-      // TODO clear input     
+      content: ''  
     });
   }
 
@@ -76,20 +76,28 @@ class App extends Component {
     });
   }
 
+  deleteAll = () => {
+    this.setState({
+      items: []
+    });
+  }
 
   render () {
     return (
       <Container>
         <Header></Header>
-        <div className='flex '>
-          <input className='m-3' onChange={this.inputHandler}></input>
-          <Button variant="outline-light" onClick={this.addTodo}>Add TODO</Button>
+        <div className='d-flex justify-content-center'>
+          <input className='m-3' onChange={this.inputHandler} value={this.state.content}></input>
+          <Button variant="outline-light" className='btn-sm m-3' onClick={this.addTodo}>Add TODO</Button>
         </div>
         <TodoList 
           items={this.state.items} 
           deleteHandler={this.deleteHandler}
           doneHandler={this.doneHandler}
           ></TodoList>
+          <div className='flex justify-content-center m-3'>
+            <Button variant='danger' className='flex justify-content-center m-3' onClick={this.deleteAll}>Delete All</Button>
+          </div>
       </Container>
     )
   }
