@@ -53,7 +53,7 @@ class App extends Component {
 
     this.setState({
       items: newItems,
-      // TODO clear input     
+      content: ''  
     });
   }
 
@@ -87,8 +87,8 @@ class App extends Component {
       <Container>
         <Header></Header>
         <div className='d-flex justify-content-center'>
-          <input className='m-3' onChange={this.inputHandler}></input>
-          <Button variant="outline-light" className='btn-sm m-3' onClick={this.addTodo} onDragEnter>Add TODO</Button>
+          <input className='m-3' onChange={this.inputHandler} value={this.state.content}></input>
+          <Button variant="outline-light" className='btn-sm m-3' onClick={this.addTodo}>Add TODO</Button>
         </div>
         <TodoList 
           items={this.state.items} 
