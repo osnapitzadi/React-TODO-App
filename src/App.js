@@ -76,6 +76,11 @@ class App extends Component {
     });
   }
 
+  deleteAll = () => {
+    this.setState({
+      items: []
+    });
+  }
 
   render () {
     return (
@@ -83,13 +88,16 @@ class App extends Component {
         <Header></Header>
         <div className='d-flex justify-content-center'>
           <input className='m-3' onChange={this.inputHandler}></input>
-          <Button variant="outline-light" className='btn-sm m-3' onClick={this.addTodo}>Add TODO</Button>
+          <Button variant="outline-light" className='btn-sm m-3' onClick={this.addTodo} onDragEnter>Add TODO</Button>
         </div>
         <TodoList 
           items={this.state.items} 
           deleteHandler={this.deleteHandler}
           doneHandler={this.doneHandler}
           ></TodoList>
+          <div className='flex justify-content-center m-3'>
+            <Button variant='danger' className='flex justify-content-center m-3' onClick={this.deleteAll}>Delete All</Button>
+          </div>
       </Container>
     )
   }
